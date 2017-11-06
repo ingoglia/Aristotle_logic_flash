@@ -1,5 +1,13 @@
 from flask import Flask, render_template
+import random
 app = Flask(__name__)
+
+cat_sent = {'a':'Every B is A',
+            'e':'No B is A',
+            'i':'Some B is A', 
+            'o':'Some B is not A'}
+cat_sent_q = list(cat_sent.keys())
+cat_q = random.choice(cat_sent_q)
 
 @app.route("/")
 def welcome():
@@ -8,7 +16,9 @@ def welcome():
 
 @app.route("/categorical_sentence_types")
 def types():
-    return "This is where the categorical types will go-- a,e,i,o"
+    return render_template(
+            "cat_sent_type.html",
+            cat_q = cat_q)
 
 @app.route("/understand_figures")
 def figures():
